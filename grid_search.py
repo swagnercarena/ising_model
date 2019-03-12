@@ -1,5 +1,6 @@
 import time
 import os
+import numpy as np
 
 lattices = ['square','triangular','hexagonal','random']
 N_k = 30

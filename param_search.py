@@ -16,7 +16,7 @@ samp_rate = 10
 m_full = np.zeros((N_lattices,n_samps//samp_rate))
 e_full = np.zeros((N_lattices,n_samps//samp_rate))
 
-prefix = '/Users/sebwagner/Documents/Grad_School/Physics 212/Final Project/Code/'
+prefix = '/home/users/swagnerc/phys_212/ising_model/'
 
 if lattice == 'random':
 	rand_lattice_path = prefix + 'rand_lat/lattice_L_%d.pkl'%(L)

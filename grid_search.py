@@ -2,7 +2,7 @@ import time
 import os
 import numpy as np
 
-lattices = ['square','triangular','hexagonal','random']
+lattices = ['square','triangular','hexagonal']
 N_k = 30
 
 for lattice in lattices:

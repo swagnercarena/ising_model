@@ -30,7 +30,7 @@ for lattice in lattices:
 				Ks = np.concatenate((np.linspace(0.05,0.3,N_k),
 					np.linspace(0.125,0.175,N_k)))
 		if lattice == 'random':
-			if nn = False:
+			if nn == False:
 				Ks = np.concatenate((np.linspace(0.2,0.5,N_k),
 					np.linspace(0.28,0.4,N_k)))
 			else:

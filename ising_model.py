@@ -86,10 +86,9 @@ class Model():
 				i: the index of the lattice point
 		'''
 		neighs = self.get_neighbors(i)
-		next_nearest = set()
+		next_nearest = set(neighs)
 		for n in neighs:
 			next_nearest.update(set(self.get_neighbors(n)))
-		next_nearest.update(neighs)
 		return list(next_nearest)
 
 	def get_distance(self,i,j):

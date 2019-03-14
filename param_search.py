@@ -7,6 +7,7 @@ from ising_model import *
 L = int(sys.argv[1])
 K = float(sys.argv[2])
 lattice = sys.argv[3]
+nnn = bool(sys.argv[4])
 
 N_lattices = 5
 n_eq = 1000
@@ -26,9 +27,9 @@ else:
 	neigh_dict = None
 
 for n in range(N_lattices):
-	ising = Model(lattice,L,K,rand_neigh=neigh_dict)
+	ising = Model(lattice,L,K,next_nearest=nnn,rand_neigh=neigh_dict)
 	m_full[n],e_full[n] = ising.wolff_algorithm(n_eq,n_samps,samp_rate)
 
 prefix = prefix + 'me_data/'
-np.savetxt(prefix+'m_full_%d_%f_%s'%(L,K,lattice),m_full)
-np.savetxt(prefix+'e_full_%d_%f_%s'%(L,K,lattice),e_full)
+np.savetxt(prefix+'m_full_%d_%f_%s_%r'%(L,K,lattice,nnn),m_full)
+np.savetxt(prefix+'e_full_%d_%f_%s_%r'%(L,K,lattice.nnn),e_full)

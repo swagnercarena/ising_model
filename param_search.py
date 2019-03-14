@@ -32,4 +32,4 @@ for n in range(N_lattices):
 
 prefix = prefix + 'me_data/'
 np.savetxt(prefix+'m_full_%d_%f_%s_%r'%(L,K,lattice,nnn),m_full)
-np.savetxt(prefix+'e_full_%d_%f_%s_%r'%(L,K,lattice.nnn),e_full)
+np.savetxt(prefix+'e_full_%d_%f_%s_%r'%(L,K,lattice,nnn),e_full)

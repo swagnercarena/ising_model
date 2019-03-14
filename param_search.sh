@@ -8,4 +8,4 @@
 #SBATCH -o /home/users/swagnerc/phys_212/slurm_output/sampling.%N.%j.out # STDOUT
 #SBATCH -e /home/users/swagnerc/phys_212/slurm_output/sampling.%N.%j.err # STDERR
 
-python param_search.py ${1} ${2} ${3}
+python param_search.py ${1} ${2} ${3} ${4}

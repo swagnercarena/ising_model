@@ -88,9 +88,29 @@ class Model():
 		neighs = self.get_neighbors(i)
 		next_nearest = set()
 		for n in neighs:
-			next_nearest.update(self.get_neighbors(n))
+			next_nearest.update(set(self.get_neighbors(n)))
 		next_nearest.update(neighs)
-		return next_nearest
+		return list(next_nearest)
+
+	def get_distance(self,i,j):
+		''' Returns the distance between node i and node j.
+			Parameters:
+				i: the index of the first node
+				j: the index of the second node
+		'''
+		L = self.L
+		if self.lattice == 'square':
+			x1 = i % L; y1 = i // L
+			x2 = j % L; y2 = j // L
+		else:
+			return 0
+		# Deal with boundary conditions by testing all four possiblities.
+		dx = np.array([x1-x2,x1-x2-L,x1-x2-L,  x1-x2,  x1-x2,  x1-x2+L, x1-x2+L])
+		dy = np.array([y1-y2,y1-y2+1,y1-y2-L+1,y1-y2-L,y1-y2+L,y1-y2+L-1,
+			y1-y2-1])
+		dists = dx**2 + dy**2
+		return np.sqrt(np.min(dists))
+
 
 	def wolff_step(self,i):
 		''' Starting the cluster at node i, run a single step of the 
@@ -116,22 +136,34 @@ class Model():
 				else:
 					neighbors.extend(self.get_neighbors(n_i))
 
-	def wolff_algorithm(self,n_eq,n_samps,samp_rate=10):
+	def wolff_algorithm(self,n_eq,n_samps,samp_rate=10,corr_index=None):
 		''' Run the full Wolff cluster update algorithm on the given model.
 			Parameters:
 				n_eq: the number of steps to take before considering the
 					model in equilibrium
 				n_samps: the number of sampling steps to take
 				samp_rate: the rate at which to probe the magnetization
+				corr_index: the index of the spin to return average correlation
+					values for.
 		'''
 		m = []
 		e = []
+		if corr_index is not None:
+			corr = np.zeros_like(self.spins)
 		for step in range(n_samps+n_eq):
 			i = np.random.randint(0,self.N)
 			self.wolff_step(i)
+			# Every samp_rate steps after equilibrium, track the
+			# desired statistics
 			if step >= n_eq and step%samp_rate == 0:
 				m.append(np.abs(self.get_magnetization()))
 				e.append(self.get_energy())
+				if corr_index is not None:
+					corr += self.spins * self.spins[corr_index]
+
+		# If a correlation index was specified, return the correlation average
+		if corr_index is not None:
+			return np.array(m), np.array(e), corr/float(n_samps // samp_rate)
 		
 		return np.array(m),np.array(e)
 

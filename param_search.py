@@ -7,7 +7,11 @@ from ising_model import *
 L = int(sys.argv[1])
 K = float(sys.argv[2])
 lattice = sys.argv[3]
-nnn = bool(sys.argv[4])
+nnn_string = sys.argv[4]
+if nnn_string == 'True':
+	nnn = True
+else:
+	nnn = False
 
 N_lattices = 5
 n_eq = 1000

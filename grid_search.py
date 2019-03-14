@@ -20,7 +20,7 @@ for lattice in lattices:
 				Ks = np.concatenate((np.linspace(0.2,0.4,N_k),
 					np.linspace(0.24,0.28,N_k)))
 			else:
-				s = np.concatenate((np.linspace(0.01,0.1,N_k),
+				Ks = np.concatenate((np.linspace(0.01,0.1,N_k),
 					np.linspace(0.06,0.08,N_k)))
 		if lattice == 'hexagonal':
 			if nn == False:
@@ -30,7 +30,7 @@ for lattice in lattices:
 				Ks = np.concatenate((np.linspace(0.05,0.3,N_k),
 					np.linspace(0.125,0.175,N_k)))
 		if lattice == 'random':
-			if nn == False:
+			if nn = False:
 				Ks = np.concatenate((np.linspace(0.2,0.5,N_k),
 					np.linspace(0.28,0.4,N_k)))
 			else:

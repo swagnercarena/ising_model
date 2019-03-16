@@ -91,11 +91,13 @@ class Model():
 			next_nearest.update(set(self.get_neighbors(n)))
 		return list(next_nearest)
 
-	def get_distance(self,i,j):
+	def get_distance(self,i,j,next_min=False,bond_dist=False):
 		''' Returns the distance between node i and node j.
 			Parameters:
 				i: the index of the first node
 				j: the index of the second node
+				next_min: Return the next smallest distance instead of the minimum
+				bond_dist: Return the bond distance instead of Euclidean distance
 		'''
 		L = self.L
 		if self.lattice == 'square':
@@ -108,6 +110,11 @@ class Model():
 		dy = np.array([y1-y2,y1-y2+1,y1-y2-L+1,y1-y2-L,y1-y2+L,y1-y2+L-1,
 			y1-y2-1])
 		dists = dx**2 + dy**2
+		if next_min:
+			dists.sort()
+			return np.sqrt(dists[1])
+		if bond_dist:
+			return np.min(np.abs(dx)+np.abs(dy))
 		return np.sqrt(np.min(dists))
 
 

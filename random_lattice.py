@@ -57,6 +57,8 @@ def plot_random_lattice(neigh_dict,x_coords,y_coords,highlight=None):
 			highlight: a list of lattice site to highlight in the plot
 	'''
 	N = len(neigh_dict)
+	plt.figure(figsize=(6, 6))
+	plt.axis('off')
 	for n in range(N):
 		for neigh in neigh_dict[n]:
 			plt.plot([x_coords[n],x_coords[neigh]],
